@@ -1,8 +1,11 @@
 import 'package:app_bloc_note/app_routes.dart';
 import 'package:app_bloc_note/helper/note_provider.dart';
+import 'package:app_bloc_note/widgets/list_item.dart';
 import 'package:app_bloc_note/widgets/noNotes_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../widgets/header_widget.dart';
 
 class NoteListScreen extends StatelessWidget {
   const NoteListScreen({Key? key}) : super(key: key);
@@ -24,7 +27,19 @@ class NoteListScreen extends StatelessWidget {
                 body: Consumer<NoteProvider>(
                   child: noNotes(context),
                   builder: (context, noteProvider, child) =>
-                      noteProvider.items.length <= 0 ? noNotes(context) : Container(),
+                      noteProvider.items.length <= 0
+                          ? noNotes(context)
+                          : ListView.builder(
+                              itemCount: noteProvider.items.length + 1,
+                              itemBuilder: (context, index) {
+                                if (index==0){
+                                  return header();
+                                }else{
+                                  final i = index-1;
+                                  final item = noteProvider.items[i];
+                                  return ListItem(item.id, item.title, item.content, item.imagePath, item.date);
+                                }
+                              }),
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
@@ -41,4 +56,5 @@ class NoteListScreen extends StatelessWidget {
           }
         });
   }
+
 }

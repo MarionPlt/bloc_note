@@ -3,9 +3,12 @@ import 'package:app_bloc_note/utils/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import 'header_widget.dart';
+
 Widget noNotes(BuildContext context) {
   return ListView(
     children: [
+      header(),
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -1,8 +1,9 @@
-import 'dart:io';
+import 'package:app_bloc_note/app_routes.dart';
+import 'package:app_bloc_note/helper/note_provider.dart';
 import 'package:app_bloc_note/utils/constants.dart';
-import 'package:image_picker/image_picker.dart';
-
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class NoteEditScreen extends StatefulWidget {
   const NoteEditScreen({Key? key}) : super(key: key);
@@ -14,8 +15,30 @@ class NoteEditScreen extends StatefulWidget {
 class _NoteEditScreenState extends State<NoteEditScreen> {
   final titleController = TextEditingController();
   final contentController = TextEditingController();
-  late File _image; //TODO revoir initialisation File
+  XFile? _image;
   final picker = ImagePicker();
+
+  void getImage(ImageSource imageSource) async {
+    XFile? imageFile = await picker.pickImage(
+      source: imageSource,
+    );
+    if (imageFile == null) return;
+
+    setState(() {
+      _image = imageFile;
+    });
+  }
+
+  void saveNote() {
+    String title = titleController.text.trim();
+    String content = contentController.text.trim();
+    String? imagePath = _image != null ? _image!.path : ''; //TODO : si pas d'image, path vide => erreurs par la suite? à voir
+    int id = DateTime.now().millisecondsSinceEpoch;
+    Provider.of<NoteProvider>(this.context, listen: false)
+        .addOrUpdateNote(id, title, content, imagePath, EditMode.ADD);
+    Navigator.of(this.context)
+        .pushReplacementNamed(noteViewScreen, arguments: id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +51,22 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           color: Colors.black,
         ),
         actions: [
           IconButton(
-            onPressed: () {}, //getImage(ImageSource.camera),
-            icon: Icon(Icons.photo_camera),
+            onPressed: () {
+              getImage(ImageSource.camera);
+            },
+            icon: const Icon(Icons.photo_camera),
             color: Colors.black,
           ),
           IconButton(
-            onPressed: () {}, // getImage(ImageSource.gallery),
-            icon: Icon(Icons.insert_photo),
+            onPressed: () {
+              getImage(ImageSource.gallery);
+            },
+            icon: const Icon(Icons.insert_photo),
             color: Colors.black,
           ),
           IconButton(
@@ -72,12 +99,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
               height: 250.0,
               child: Stack(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        image: DecorationImage(
-                            image: FileImage(_image), fit: BoxFit.cover)),
-                  ),
+                  Container(child: Image.asset(_image!.path)),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
@@ -90,8 +112,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
                         child: InkWell(
                           onTap: () {
                             setState(() {
-                              _image = _image.delete(recursive: false)
-                                  as File; //TODO revoir nullable du File
+                              _image = null;
                             });
                           },
                           child: Icon(
@@ -122,7 +143,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
         onPressed: () {
           if (titleController.text.isEmpty)
             titleController.text = 'Note_SansTitre';
-          // saveNote();
+          saveNote();
         },
         child: Icon(Icons.save),
       ),
