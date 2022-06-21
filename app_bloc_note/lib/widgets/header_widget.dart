@@ -20,11 +20,11 @@ Widget header() {
     child: Container(
       decoration: BoxDecoration(
           color: headerColor,
-          borderRadius: BorderRadius.all(Radius.circular(25.0))),
-      height: 50,
-      width: 75,
+          borderRadius: BorderRadius.only(bottomRight: Radius.circular(15.0))),
+      height: 25,
+      width: 25,
       child: Text(
-        'Repo GitHub',
+        'Accéder au répertoire GitHub en cliquant ici',
         style: headerRideStyle,
       ),
     ),

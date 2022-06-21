@@ -5,7 +5,7 @@ const grey = Color(0xFFEAEAEA);
 const grey2 = Color(0xFF6D6D6D);
 const black = Color(0xFF1C1C1C);
 const black2 = Color(0xFF424242);
-const headerColor = Color(0xFFFD5872);
+const headerColor = Color(0xFF0AAF9C);
 const white = Colors.white;
 
 var headerRideStyle = GoogleFonts.roboto(

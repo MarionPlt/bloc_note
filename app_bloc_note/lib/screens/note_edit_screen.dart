@@ -32,7 +32,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
   void saveNote() {
     String title = titleController.text.trim();
     String content = contentController.text.trim();
-    String? imagePath = _image != null ? _image!.path : ''; //TODO : si pas d'image, path vide => erreurs par la suite? à voir
+    String? imagePath = _image != null ? _image!.path : '';
     int id = DateTime.now().millisecondsSinceEpoch;
     Provider.of<NoteProvider>(this.context, listen: false)
         .addOrUpdateNote(id, title, content, imagePath, EditMode.ADD);
@@ -73,7 +73,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
             color: Colors.black,
           ),
         ],
@@ -81,33 +81,33 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
       body: SingleChildScrollView(
         child: Column(children: [
           Padding(
-            padding:
-                EdgeInsets.only(left: 10.0, right: 5.0, top: 10.0, bottom: 5.0),
+            padding: const EdgeInsets.only(
+                left: 10.0, right: 5.0, top: 10.0, bottom: 5.0),
             child: TextField(
               controller: titleController,
               maxLines: null,
               textCapitalization: TextCapitalization.sentences,
               style: createTitle,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   hintText: 'Titre de la note', border: InputBorder.none),
             ),
           ),
           if (_image != null)
             Container(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               width: MediaQuery.of(context).size.width,
               height: 250.0,
               child: Stack(
                 children: [
-                  Container(child: Image.asset(_image!.path)),
+                  Image.asset(_image!.path),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: Container(
                         height: 30.0,
                         width: 30.0,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             shape: BoxShape.circle, color: Colors.white),
                         child: InkWell(
                           onTap: () {
@@ -115,7 +115,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
                               _image = null;
                             });
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.delete,
                             size: 16.0,
                           ),
@@ -133,7 +133,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
               controller: contentController,
               maxLines: null,
               style: createContent,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   hintText: 'Le contenu de la note', border: InputBorder.none),
             ),
           )
@@ -141,11 +141,12 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          if (titleController.text.isEmpty)
+          if (titleController.text.isEmpty) {
             titleController.text = 'Note_SansTitre';
+          }
           saveNote();
         },
-        child: Icon(Icons.save),
+        child: const Icon(Icons.save),
       ),
     );
   }

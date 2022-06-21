@@ -15,11 +15,11 @@ class DeletePopUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-      title: Text('Delete?'),
-      content: Text('Do you want to delete the note?'),
+      title: const Text('Supprimer?'),
+      content: const Text('Voulez-vous supprimer cette note?'),
       actions: [
         TextButton(
-          child: Text('Yes'),
+          child: const Text('Yes'),
           onPressed: () {
             Provider.of<NoteProvider>(context, listen: false)
                 .deleteNote(selectedNote.id);
@@ -27,7 +27,7 @@ class DeletePopUp extends StatelessWidget {
           },
         ),
         TextButton(
-          child: Text('No'),
+          child: const Text('No'),
           onPressed: () {
             Navigator.pop(context);
           },

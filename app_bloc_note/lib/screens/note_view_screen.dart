@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:app_bloc_note/helper/note_provider.dart';
 import 'package:app_bloc_note/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../app_routes.dart';
 import '../models/note.dart';
 import '../widgets/delete_popup.dart';
@@ -14,8 +14,8 @@ class NoteViewScreen extends StatefulWidget {
 
   @override
   _NoteViewScreenState createState() => _NoteViewScreenState();
-}
 
+}
 class _NoteViewScreenState extends State<NoteViewScreen> {
   late Note selectedNote;
 
@@ -24,15 +24,11 @@ class _NoteViewScreenState extends State<NoteViewScreen> {
     super.didChangeDependencies();
 
     if (ModalRoute.of(context)!.settings.arguments != null) {
-      final id =
-          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    }
+       final id =ModalRoute.of(context)!.settings.arguments as int;
 
     final provider = Provider.of<NoteProvider>(context);
-    if (provider.getNote(id!) != null) {
-      selectedNote = provider.getNote(
-          id!); //TODO : je n'arrive pas à récupérer en argument l'id pour récuperer la note
-    }
+    selectedNote = provider.getNote(id);
+}
   }
 
   @override
@@ -43,7 +39,7 @@ class _NoteViewScreenState extends State<NoteViewScreen> {
         elevation: 0.7,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           ),
@@ -53,7 +49,7 @@ class _NoteViewScreenState extends State<NoteViewScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.delete,
               color: Colors.black,
             ),
@@ -68,23 +64,23 @@ class _NoteViewScreenState extends State<NoteViewScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                selectedNote?.title,
+                selectedNote.title,
                 style: viewTitleStyle,
               ),
             ),
             Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Icon(
                     Icons.access_time,
                     size: 18,
                   ),
                 ),
-                Text('${selectedNote?.date}')
+                Text(selectedNote.date)
               ],
             ),
-            if (selectedNote.imagePath != null)
+            if (selectedNote.imagePath != 'null' && selectedNote.imagePath != '' )
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Image.file(File(selectedNote.imagePath)),
@@ -104,14 +100,14 @@ class _NoteViewScreenState extends State<NoteViewScreen> {
           Navigator.pushNamed(context, noteEditScreen,
               arguments: selectedNote.id);
         },
-        child: Icon(Icons.edit),
+        child: const Icon(Icons.edit),
       ),
     );
   }
 
   _showDialog() {
     showDialog(
-        context: this.context,
+        context: context,
         builder: (context) {
           return DeletePopUp(selectedNote: selectedNote);
         });

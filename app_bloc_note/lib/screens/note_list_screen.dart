@@ -16,7 +16,7 @@ class NoteListScreen extends StatelessWidget {
         future: Provider.of<NoteProvider>(context, listen: false).getNotes(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(
+            return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
@@ -27,7 +27,7 @@ class NoteListScreen extends StatelessWidget {
                 body: Consumer<NoteProvider>(
                   child: noNotes(context),
                   builder: (context, noteProvider, child) =>
-                      noteProvider.items.length <= 0
+                      noteProvider.items.isEmpty
                           ? noNotes(context)
                           : ListView.builder(
                               itemCount: noteProvider.items.length + 1,
@@ -45,11 +45,11 @@ class NoteListScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, noteEditScreen);
                   },
-                  child: Icon(Icons.add),
+                  child: const Icon(Icons.add),
                 ),
               );
             }
-            return Container(
+            return const SizedBox(
               width: 0.0,
               height: 0.0,
             );

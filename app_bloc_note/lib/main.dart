@@ -1,9 +1,5 @@
 import 'package:app_bloc_note/app_routes.dart';
 import 'package:app_bloc_note/helper/note_provider.dart';
-import 'package:app_bloc_note/screens/note_edit_screen.dart';
-import 'package:app_bloc_note/screens/note_list_screen.dart';
-import 'package:app_bloc_note/screens/note_view_screen.dart';
-import 'package:app_bloc_note/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
