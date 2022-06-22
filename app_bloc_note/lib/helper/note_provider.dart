@@ -44,7 +44,7 @@ class NoteProvider with ChangeNotifier {
   }
 
   Note getNote(int id) {
-    return _items.firstWhere((note) => note.id == id, orElse: () => null);
+    return _items.firstWhere((note) => note.id == id);
   }
 
   Future deleteNote(int id) {
