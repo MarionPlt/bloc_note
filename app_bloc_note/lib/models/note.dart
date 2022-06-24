@@ -16,8 +16,8 @@ class Note {
 
   int get id => _id;
 
-  String get date{
+  String get date {
     final date = DateTime.fromMillisecondsSinceEpoch(id);
-    return DateFormat('EEE h:mm a, dd/MM/YYYY').format(date);
+    return DateFormat('EEE h:mm a, dd/MM/yyyy').format(date);
   }
 }

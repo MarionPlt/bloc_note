@@ -9,5 +9,6 @@ ESGI 4eme année Architecture Logicielle
 * Ecrivez des notes
 * Ajoutez des images de votre bibliothèque ou via votre appareil photo
 * Consultez la liste des notes
+* Editez des notes existantes
 * Supprimez vos notes
 

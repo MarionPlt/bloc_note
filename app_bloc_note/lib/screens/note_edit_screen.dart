@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:app_bloc_note/app_routes.dart';
 import 'package:app_bloc_note/helper/note_provider.dart';
 import 'package:app_bloc_note/utils/constants.dart';
+import 'package:app_bloc_note/widgets/delete_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
+import '../models/note.dart';
 
 class NoteEditScreen extends StatefulWidget {
   const NoteEditScreen({Key? key}) : super(key: key);
@@ -17,6 +22,29 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
   final contentController = TextEditingController();
   XFile? _image;
   final picker = ImagePicker();
+  bool firstTime = true;
+  late Note selectedNote;
+  int? id;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (firstTime) {
+      if (ModalRoute.of(context)!.settings.arguments != null) {
+        id = ModalRoute.of(context)!.settings.arguments as int;
+        selectedNote =
+            Provider.of<NoteProvider>(context, listen: false).getNote(id!);
+        titleController.text = selectedNote.title;
+        contentController.text = selectedNote.content;
+
+        if (selectedNote.imagePath != '') {
+          _image = XFile(selectedNote.imagePath);
+        }
+      }
+      firstTime = false;
+    }
+  }
 
   void getImage(ImageSource imageSource) async {
     XFile? imageFile = await picker.pickImage(
@@ -33,11 +61,17 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
     String title = titleController.text.trim();
     String content = contentController.text.trim();
     String? imagePath = _image != null ? _image!.path : '';
-    int id = DateTime.now().millisecondsSinceEpoch;
-    Provider.of<NoteProvider>(this.context, listen: false)
-        .addOrUpdateNote(id, title, content, imagePath, EditMode.ADD);
-    Navigator.of(this.context)
-        .pushReplacementNamed(noteViewScreen, arguments: id);
+    if (id != null) {
+      Provider.of<NoteProvider>(context, listen: false)
+          .addOrUpdateNote(id!, title, content, imagePath, EditMode.UPDATE);
+      Navigator.of(context).pop();
+    } else {
+      int id = DateTime.now().millisecondsSinceEpoch;
+      Provider.of<NoteProvider>(context, listen: false)
+          .addOrUpdateNote(id, title, content, imagePath, EditMode.ADD);
+      Navigator.of(context)
+          .pushReplacementNamed(noteViewScreen, arguments: id);
+    }
   }
 
   @override
@@ -71,7 +105,11 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              if (id != null) {
+                delete();
+              } else {
+                Navigator.pop(context);
+              }
             },
             icon: const Icon(Icons.delete),
             color: Colors.black,
@@ -99,14 +137,14 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
               height: 250.0,
               child: Stack(
                 children: [
-                  Image.asset(_image!.path),
+                  Image.file(File(_image!.path)),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Container(
-                        height: 30.0,
-                        width: 30.0,
+                        height: 20.0,
+                        width: 32.0,
                         decoration: const BoxDecoration(
                             shape: BoxShape.circle, color: Colors.white),
                         child: InkWell(
@@ -156,5 +194,13 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
     titleController.dispose();
     contentController.dispose();
     super.dispose();
+  }
+
+  void delete() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return DeletePopUp(selectedNote: selectedNote);
+        });
   }
 }

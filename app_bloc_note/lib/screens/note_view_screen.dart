@@ -14,8 +14,8 @@ class NoteViewScreen extends StatefulWidget {
 
   @override
   _NoteViewScreenState createState() => _NoteViewScreenState();
-
 }
+
 class _NoteViewScreenState extends State<NoteViewScreen> {
   late Note selectedNote;
 
@@ -24,11 +24,11 @@ class _NoteViewScreenState extends State<NoteViewScreen> {
     super.didChangeDependencies();
 
     if (ModalRoute.of(context)!.settings.arguments != null) {
-       final id =ModalRoute.of(context)!.settings.arguments as int;
+      final id = ModalRoute.of(context)!.settings.arguments as int;
 
-    final provider = Provider.of<NoteProvider>(context);
-    selectedNote = provider.getNote(id);
-}
+      final provider = Provider.of<NoteProvider>(context);
+      selectedNote = provider.getNote(id);
+    }
   }
 
   @override
@@ -53,7 +53,7 @@ class _NoteViewScreenState extends State<NoteViewScreen> {
               Icons.delete,
               color: Colors.black,
             ),
-            onPressed: () => _showDialog(),
+            onPressed: () => delete(),
           ),
         ],
       ),
@@ -80,7 +80,8 @@ class _NoteViewScreenState extends State<NoteViewScreen> {
                 Text(selectedNote.date)
               ],
             ),
-            if (selectedNote.imagePath != 'null' && selectedNote.imagePath != '' )
+            if (selectedNote.imagePath != 'null' &&
+                selectedNote.imagePath != '')
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Image.file(File(selectedNote.imagePath)),
@@ -105,7 +106,7 @@ class _NoteViewScreenState extends State<NoteViewScreen> {
     );
   }
 
-  _showDialog() {
+  delete() {
     showDialog(
         context: context,
         builder: (context) {
