@@ -18,7 +18,7 @@ Widget header() {
       getOnRepoGit();
     },
     child: Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           color: headerColor,
           borderRadius: BorderRadius.only(bottomRight: Radius.circular(15.0))),
       height: 25,

@@ -9,14 +9,14 @@ const headerColor = Color(0xFF0AAF9C);
 const white = Colors.white;
 
 var headerRideStyle = GoogleFonts.roboto(
-  textStyle: TextStyle(
+  textStyle: const TextStyle(
     color: white,
     fontSize: 15.0,
   ),
 );
 
 var headerNotesStyle = GoogleFonts.roboto(
-  textStyle: TextStyle(
+  textStyle: const TextStyle(
     color: white,
     fontSize: 45.0,
     fontWeight: FontWeight.bold,
@@ -29,22 +29,21 @@ enum EditMode {
 }
 
 var noNotesStyle = GoogleFonts.roboto(
-  textStyle: TextStyle(
+  textStyle: const TextStyle(
     fontSize: 22.0,
     color: black2,
     fontWeight: FontWeight.w600,
-
   ),
 );
 var boldPlus = GoogleFonts.roboto(
-  textStyle: TextStyle(
+  textStyle: const TextStyle(
     fontSize: 30.0,
     color: Colors.blueAccent,
     fontWeight: FontWeight.bold,
   ),
 );
 var itemTitle = GoogleFonts.roboto(
-  textStyle: TextStyle(
+  textStyle: const TextStyle(
     fontSize: 18.0,
     color: black,
     fontWeight: FontWeight.bold,
@@ -52,14 +51,14 @@ var itemTitle = GoogleFonts.roboto(
 );
 
 var itemDateStyle = GoogleFonts.roboto(
-  textStyle: TextStyle(
+  textStyle: const TextStyle(
     fontSize: 11.0,
     color: grey2,
   ),
 );
 
 var itemContentStyle = GoogleFonts.roboto(
-  textStyle: TextStyle(
+  textStyle: const TextStyle(
     fontSize: 15.0,
     color: grey2,
   ),
@@ -77,13 +76,13 @@ var viewContentStyle = GoogleFonts.roboto(
     fontWeight: FontWeight.w400);
 
 var createTitle = GoogleFonts.roboto(
-    textStyle: TextStyle(
-      fontSize: 28.0,
-      fontWeight: FontWeight.w900,
-    ));
+    textStyle: const TextStyle(
+  fontSize: 28.0,
+  fontWeight: FontWeight.w900,
+));
 
 var createContent = GoogleFonts.roboto(
-  textStyle: TextStyle(
+  textStyle: const TextStyle(
     letterSpacing: 1.0,
     fontSize: 20.0,
     height: 1.5,
@@ -92,7 +91,7 @@ var createContent = GoogleFonts.roboto(
 );
 
 var shadow = [
-  BoxShadow(
+  const BoxShadow(
     color: grey,
     blurRadius: 30,
     offset: Offset(0, 10),

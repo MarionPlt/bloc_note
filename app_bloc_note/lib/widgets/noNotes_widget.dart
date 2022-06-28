@@ -20,7 +20,7 @@ Widget noNotes(BuildContext context) {
           ),
           RichText(
               text: TextSpan(style: noNotesStyle, children: [
-            TextSpan(text: 'Oups! Aucune note disponible! \nTape sur '),
+            const TextSpan(text: 'Oups! Aucune note disponible! \nTape sur '),
             TextSpan(
                 text: '+',
                 style: boldPlus,
@@ -28,7 +28,7 @@ Widget noNotes(BuildContext context) {
                   ..onTap = () {
                     Navigator.pushNamed(context, noteEditScreen);
                   }),
-            TextSpan(text: ' pour ajouter une note')
+            const TextSpan(text: ' pour ajouter une note')
           ]))
         ],
       )

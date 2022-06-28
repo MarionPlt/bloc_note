@@ -18,14 +18,14 @@ class ListItem extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 135.0,
-      margin: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: InkWell(
         onTap: () {
           Navigator.pushNamed(context, noteViewScreen, arguments: id);
         },
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: shadow,
@@ -36,7 +36,7 @@ class ListItem extends StatelessWidget {
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -46,7 +46,7 @@ class ListItem extends StatelessWidget {
                         maxLines: 2,
                         style: itemTitle,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 4.0,
                       ),
                       Text(
@@ -54,7 +54,7 @@ class ListItem extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: itemDateStyle,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8.0,
                       ),
                       Expanded(
@@ -72,7 +72,7 @@ class ListItem extends StatelessWidget {
               if (imagePath != null)
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 12.0,
                     ),
                     Container(
