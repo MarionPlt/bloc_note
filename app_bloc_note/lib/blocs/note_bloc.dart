@@ -6,5 +6,5 @@ import 'note_event.dart';
 import 'note_state.dart';
 
 class NoteBloc extends Bloc<NoteEvent, NoteState> {
-  NoteBloc(List<Note> notes) : super(InitialNoteState()) {}
+  NoteBloc() : super(InitialNoteState()) {}
 }
