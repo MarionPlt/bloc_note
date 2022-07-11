@@ -1,6 +1,9 @@
 name: flutterApk
 on:
   - push
+defaults:
+  run:
+    working-directory: ./app_bloc_note
 jobs:
   building_apk:
     runs-on: ubuntu-20.04
@@ -14,6 +17,5 @@ jobs:
         with:
           flutter-version: '3.0.1'
       - run: flutter pub get
-        working-directory: ./app_bloc_note
-      #- run: flutter test
+      - run: flutter test
       - run: flutter build apk
