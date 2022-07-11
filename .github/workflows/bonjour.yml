@@ -5,4 +5,5 @@ jobs:
   dire_bonjour:
     runs-on: ubuntu-20.04
     steps:
-      - run: echo "Bonjour 👋"
+      - run: ls -l # Liste les fichier du répertoire courant
+      - run: cat README.md # Affiche le contenu du fichier `README.md` à la base du dépôt
