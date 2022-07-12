@@ -14,6 +14,6 @@ void main() {
   testWidgets('Open the app by touching the image', (WidgetTester tester) async {
 
     //just to test on CI
-    expect(1,15);
+    expect(1,1);
   });
 }
