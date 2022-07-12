@@ -1,14 +1,6 @@
 # app_bloc_note
 
-TP Flutter ESGI Marion PLAYOUT & Julien POTY
+branche dédiée à des tests CI/CD
 
-ESGI 4eme année Architecture Logicielle
-
-## Application de prise de note :
-
-* Ecrivez des notes
-* Ajoutez des images de votre bibliothèque ou via votre appareil photo
-* Consultez la liste des notes
-* Editez des notes existantes
-* Supprimez vos notes
+## ne pas prendre en compte pour le TP Flutter ESGI 4Al
 
