@@ -1,9 +1,11 @@
 name: flutterApk
 on:
-  - push
+  push:
+    paths: './app_bloc_note/**'
 defaults:
   run:
     working-directory: ./app_bloc_note
+
 jobs:
   building_apk:
     runs-on: ubuntu-20.04
