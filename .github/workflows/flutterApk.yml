@@ -1,6 +1,8 @@
 name: flutterApk
 on:
   push:
+    paths:
+      - 'app_bloc_note/**'
 
 defaults:
   run:
