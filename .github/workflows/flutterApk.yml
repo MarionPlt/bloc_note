@@ -13,21 +13,21 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+      uses: actions/checkout@v3
       - name: Setup
-        uses: actions/setup-java@v2
+      uses: actions/setup-java@v2
       with:
         distribution: 'zulu'
         java-version: '11'
       - name: Flutter business
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.0.1'
-          - run: flutter pub get
-          - run: flutter test
-          - run: flutter build apk
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.0.1'
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter build apk
       - name: Release
-        uses: softprops/action-gh-release@v1
-        if: github.repository == 'bloc_note/FlutterpourCI' && startsWith(github.ref, 'refs/tags/')
-        with:
-          files: '**.apk'
+      uses: softprops/action-gh-release@v1
+      if: github.repository == 'bloc_note/FlutterpourCI' && startsWith(github.ref, 'refs/tags/')
+      with:
+        files: '**.apk'
