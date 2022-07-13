@@ -31,3 +31,4 @@ jobs:
         if: github.repository == 'bloc_note/FlutterpourCI' && startsWith(github.ref, 'refs/tags/')
         with:
           files: '**.apk'
+          generate_release_notes: true
