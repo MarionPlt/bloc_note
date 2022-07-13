@@ -31,10 +31,16 @@ jobs:
       - run: flutter test
       - run: flutter build apk --split-per-abi
       - run: find ./ -type f -name "*.apk"
+      - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - id: nextversion
+        name: next release version
+        uses: jenkins-x-plugins/jx-release-version@v2.5.2
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+       # if: startsWith(github.ref, 'refs/tags/')
         with:
+          tag_name: ${{ steps.nextversion.outputs.version }}
           files: |
             app_bloc_note/build/app/outputs/flutter-apk/*.apk
           generate_release_notes: true
