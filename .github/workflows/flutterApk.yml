@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'app_bloc_note/**'
+      - '.github/**'
 
 defaults:
   run:
