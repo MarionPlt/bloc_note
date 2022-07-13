@@ -46,3 +46,4 @@ jobs:
             app_bloc_note/build/app/outputs/flutter-apk/*.apk
           generate_release_notes: true
           fail_on_unmatched_files: true
+          target_commitish: ${{ github.ref }}
