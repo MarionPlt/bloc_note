@@ -11,7 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 
 void main() {
-  testWidgets('Open the app by touching the image', (WidgetTester tester) async {
+  testWidgets('A dumb test that will work', (WidgetTester tester) async {
 
     //just to test on CI
     expect(1,1);
