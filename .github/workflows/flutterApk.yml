@@ -30,5 +30,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: github.repository == 'bloc_note/FlutterpourCI' && startsWith(github.ref, 'refs/tags/')
         with:
-          files: '**.apk'
+          files: 'build/app/outputs/flutter-apk/app.apk'
           generate_release_notes: true
